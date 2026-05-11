@@ -8,6 +8,7 @@
 <body>
     <h1>Backend</h1>
     <button onclick="getData()">Click</button>
+    <button onclick="postData()">Clcik for Post</button>
     <p id="result"></p>
 
     <script>
@@ -16,6 +17,19 @@
             const data = await response.text()
 
             document.getElementById("result").innerText = data;
+        }
+
+        async function postData() {
+            const response = await fetch("http://localhost:3000/test",{ //ดึงข้อมูลจาก localhost
+                method:"POST", //ประเภท POST
+                headers:{"Content-Type":"application/json"}, //ส่งข้อความเป็น JSON
+                body:JSON.stringify({ //json แปลงข้อความเป็น string
+                    name:"New",
+                    message:"Correct Answer"
+                })
+            })
+            const data = await response.text() //data เก็บข้อความจาก response
+            document.getElementById("result").innerText = JSON.stringify(data) //ให้ id result นำข้อมูลจาก data ที่แปลงเป็น string มาแสดง
         }
 
     </script>
